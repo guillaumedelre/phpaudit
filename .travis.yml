@@ -1,0 +1,21 @@
+dist: trusty
+
+jobs:
+    include:
+        -
+            before_script: export BUILD_DIR=`pwd`
+            stage: "[qatools] build docker image"
+            script:
+                - cd $BUILD_DIR/qatools/7.0
+                - docker build --no-cache --tag guillaumedelre/qatools:7.0 .
+                - cd $BUILD_DIR/qatools/7.1
+                - docker build --no-cache --tag guillaumedelre/qatools:7.1 .
+                - cd $BUILD_DIR/qatools/7.2
+                - docker build --no-cache --tag guillaumedelre/qatools:7.2 .
+                - cd $BUILD_DIR/qatools/7.3
+                - docker build --no-cache --tag guillaumedelre/qatools:7.3 .
+                - docker build --no-cache --tag guillaumedelre/qatools:latest .
+        -
+            stage: "[qatools] test docker image"
+            before_script: export BUILD_DIR=`pwd`
+            script: cd $BUILD_DIR/qatools && ./run_test.sh
