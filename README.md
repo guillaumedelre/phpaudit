@@ -1,4 +1,4 @@
-# Dockerfiles 
+# Dockerfiles <img align="right" src="https://api.travis-ci.org/guillaumedelre/dockerfiles.svg">
 
 | Name 																		  | Stars 																																		   | Pulls 																																		   | Size / Layers 																		| Build                                                                            |
 | :--- 																		  | :---: 																																		   | :---: 																																		   | :---: 																				| :---:                                                                            |
