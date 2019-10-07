@@ -1,4 +1,4 @@
-# QATools <img align="right" src="https://img.shields.io/docker/cloud/automated/guillaumedelre/qatools?style=flat"> <img align="right" src="https://img.shields.io/docker/cloud/build/guillaumedelre/qatools?style=flat">
+# QATools <img align="right" src="https://img.shields.io/docker/cloud/automated/guillaumedelre/qatools?style=flat-square"> <img align="right" src="https://img.shields.io/docker/cloud/build/guillaumedelre/qatools?style=flat-square">
 
 - [`7.3`, `latest` (*qatools/7.3/Dockerfile*)](https://github.com/guillaumedelre/dockerfiles/tree/master/qatools/7.3/Dockerfile)
 - [`7.2` (*qatools/7.2/Dockerfile*)](https://github.com/guillaumedelre/dockerfiles/tree/master/qatools/7.2/Dockerfile)
