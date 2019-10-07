@@ -1,4 +1,4 @@
-# Dockerfiles <img align="right" src="https://img.shields.io/travis/guillaumedelre/qatools?style=flat">
+# Dockerfiles <img align="right" src="https://img.shields.io/travis/guillaumedelre/dockerfiles">
 
 | Name 																		  | Stars 																																		   | Pulls 																																		   | Size / Layers 																		| Build                                                                            |
 | :--- 																		  | :---: 																																		   | :---: 																																		   | :---: 																				| :---:                                                                            |
