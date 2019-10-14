@@ -13,7 +13,6 @@ test:
 	docker-compose run --rm qatools phpmetrics --version
 	docker-compose run --rm qatools phpstan --version
 	docker-compose run --rm qatools security-checker --version
-	docker-compose run --rm qatools simple-phpunit --version
 	docker-compose run --rm qatools yaml-linter --version
 
 clean:

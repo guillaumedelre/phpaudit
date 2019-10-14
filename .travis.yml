@@ -1,22 +1,33 @@
 ---
 sudo: required
+
 notifications:
     email: true
+
 addons:
     apt_packages:
         - parallel
+
 services:
     - docker
+
+env:
+    global:
+        - DOCKER_LOGIN=guillaumedelre
+        - secure: oFU6phaW54U1Z4fvxfT/e7uStxbM0tlWGaLT9IVAAkuvu3BCdRz56cE/OdNQcJOcEieOzM7Z9sI+9qN5CxL3e3BfHQxFWvLOQh+oFeg98T6qtz6MHdr2Gpjn+RGzAQPiPb24ohxBwal2FgHzYccmb4DS8SS4XhQMlsTDZS8dUPVH0KoqSNbjnK1ZNEf7O5LcSy6ZO5UAFOWcniU56DpmJrA0UZfqN84XS5IQWNe/CwKGeRPGlFkQUqCfB3sa3iX48PwyUYn7VtbvdCDIyjYXDjCaBnxdTChIuoYMnHSFTVol5e2pHPEmOVjGh7+lxRt4OKVmy09Xpj6ZiQWT32xwKVwiYxUf56uu7OgirNyFcPtBbT9YiEt/QY9s6enfnkIM3LMF1cjemumP5PNyusDT5Zvc1CwjYhBOsd+TaJNfZ9Jnwv9xN6qakS6bm2uvhrlVT+C+kpTH1S7BF8je2SJ2wGOnoIGk+1Fcub1MDVdNYtsGBcOOT1W33VuLJVzMRLVqMZ4wfU5jfWYw6NAp3jCRaD5ZbqIhLSG5JeBuFnG25BZd1duCI0NqO3YC6eQ2YQTo2KitlDgiGPb1y9zQ9gB+aTqRk05YrMs9BLXOb4Avm3P9CLJxl9+sARdAPqmCe5uWPpzgMmQi+JVr9jTAdR4LSZ6oJ1UHWrgBuPFKWvja9HM=
+
 branches:
     only:
         - master
         - develop
         - feature
+
 before_install:
     - sudo apt-get update
     - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
     - sudo pip install docker-compose
     - IMAGES=$(find . -type f -name docker-compose.yaml ! -path "./.tests/*" -printf '%h\n' | sort)
+
 install:
     - |
         # General configuration
@@ -35,15 +46,25 @@ install:
     - |
         run_builds () {
             set -e
-            echo "$IMAGES" | parallel --gnu -j10% "tfold {} 'cd {} && docker-compose build > log || (tail -n 1000 log && false)'"
+            echo "$IMAGES" | parallel --gnu -j10% "tfold {} 'cd {} && ./docker_build.sh > log || (tail -n 1000 log && false)'"
         }
     - |
         run_tests () {
             set -e
-            echo "$IMAGES" | parallel --gnu -j10% "tfold 'test {}' 'cd ./.tests/{} && make test; make clean'"
+            echo "$IMAGES" | parallel --gnu -j10% "tfold 'test {}' 'cd ./.tests/{} && make test'"
         }
+    - |
+        docker_push () {
+            set -e
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin;
+            echo "$IMAGES" | parallel --gnu -j10% "tfold {} 'cd {} && ./docker_push.sh > log || (tail -n 1000 log && false)'"
+        }
+
 script:
     - docker --version
     - docker-compose --version
     - (run_builds)
     - (run_tests)
+
+after_success:
+    - (docker_push)

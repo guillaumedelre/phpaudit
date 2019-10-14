@@ -8,15 +8,9 @@ Mkdocs si started with live reload feature enabled.
 
 ## Structure
 
-`./resources/docs/` contains all markdown files for the documentation.
-
-`./resources/mkdocs.yml` the mkdocs configuration file.
-
-`./docker-compose.yaml` the docker-compose file to run MkDocs.
+`./mkdocs.yml` the mkdocs configuration file.
 
 `./Dockerfile` the docker image configuration.
-
-`./entrypoint.sh` is the entrypoint of docker image.
 
 ## Docker
 
@@ -29,7 +23,7 @@ Grab the image, and run one of tool with your project mounted in the work direct
 ```
 cd my_documentation_project
 docker pull guillaumedelre/mkdocs
-docker run -t -i -v `pwd`:/project guillaumedelre/mkdocs
+docker run -it -v `pwd`:/project guillaumedelre/mkdocs
 ```
 
 ### Troubleshooting
@@ -51,7 +45,7 @@ Sometimes you might just want to review how things are deployed inside a running
  exec_ command:
 
 ```bash
-docker exec -ti mkdocs bash
+docker exec -it mkdocs bash
 ```
 
 ## Links
