@@ -19,3 +19,10 @@ jobs:
             stage: "[qatools] test docker image"
             before_script: export BUILD_DIR=`pwd`
             script: cd $BUILD_DIR/qatools && ./run_test.sh
+        -
+            before_script: export BUILD_DIR=`pwd`
+            stage: "[mkdocs] build docker image"
+            script:
+                - cd $BUILD_DIR/mkdocs/1.0.4
+                - docker build --no-cache --tag guillaumedelre/mkdocs:1.0.4 .
+                - docker build --no-cache --tag guillaumedelre/mkdocs:latest .
