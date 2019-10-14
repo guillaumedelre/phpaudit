@@ -1,0 +1,5 @@
+version: '3'
+
+services:
+    qatools:
+        image: guillaumedelre/qatools:7.1
