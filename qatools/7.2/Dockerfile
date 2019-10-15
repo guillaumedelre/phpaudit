@@ -1,4 +1,4 @@
-FROM composer as src
+FROM composer:1.5.2 as src
 
 RUN set -xe; \
     mkdir -p /usr/local/src; \

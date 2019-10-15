@@ -1,0 +1,5 @@
+version: '3'
+
+services:
+    mkdocs:
+        image: guillaumedelre/mkdocs:1.0.4

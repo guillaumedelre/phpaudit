@@ -1,4 +1,4 @@
-FROM composer as src
+FROM composer:1.2.2 as src
 
 RUN set -xe; \
     mkdir -p /usr/local/src; \
@@ -22,7 +22,6 @@ RUN set -xe; \
     composer bin symfony-friendly require --optimize-autoloader \
         friendsoftwig/twigcs \
         friendsofphp/php-cs-fixer \
-        heahdude/yaml-linter \
         pdepend/pdepend \
         phan/phan \
         phpmd/phpmd \
